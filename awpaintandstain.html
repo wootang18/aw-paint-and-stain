@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.W Paint and Stain — East Texas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --dark: #0D1F1E;
+  --teal: #1B6B63;
+  --teal-light: #2E9E93;
+  --teal-bright: #3ABFB3;
+  --cream: #F5F0E8;
+  --cream-dark: #EAE3D5;
+  --white: #FFFFFF;
+  --gray: #8A9A98;
+  --text: #1A2E2C;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 32px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(13,31,30,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-logo img {
+  height: 38px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--teal-bright); }
+
+.nav-cta {
+  background: var(--teal);
+  color: var(--white) !important;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  transition: background 0.2s !important;
+}
+
+.nav-cta:hover { background: var(--teal-light) !important; color: var(--white) !important; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  nav { padding: 0 20px; }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: var(--dark);
+    padding: 24px 24px 32px;
+    gap: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--dark);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 68px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(27,107,99,0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(58,191,179,0.08) 0%, transparent 60%);
+}
+
+.hero-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    padding: 60px 24px;
+    gap: 40px;
+  }
+}
+
+.hero-text {}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(58,191,179,0.12);
+  border: 1px solid rgba(58,191,179,0.25);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal-bright);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal-bright);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--teal-bright);
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  max-width: 420px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  flex-wrap: wrap;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--teal-bright);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* Hero photo collage */
+.hero-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+
+.hero-photo {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-photo:first-child {
+  grid-column: 1 / 3;
+  height: 220px;
+}
+
+.hero-photo:not(:first-child) { height: 150px; }
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.hero-photo:hover img { transform: scale(1.04); }
+
+.hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,31,30,0.4) 0%, transparent 60%);
+}
+
+@media (max-width: 900px) {
+  .hero-photos { display: none; }
+}
+
+/* ── SECTION BASE ── */
+section { padding: 96px 0; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+  section { padding: 72px 0; }
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--dark);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 520px;
+  font-weight: 300;
+}
+
+/* ── SERVICES ── */
+#services { background: var(--dark); }
+
+#services .section-title { color: var(--white); }
+#services .section-label { color: var(--teal-bright); }
+#services .section-label::before { background: var(--teal-bright); }
+#services .section-sub { color: rgba(255,255,255,0.45); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 56px;
+}
+
+@media (max-width: 900px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+
+.service-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 28px 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-bright));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  background: rgba(27,107,99,0.15);
+  border-color: rgba(58,191,179,0.2);
+  transform: translateY(-3px);
+}
+
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.service-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+}
+
+/* ── ABOUT ── */
+#about { background: var(--cream); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.about-photo-wrap {
+  position: relative;
+}
+
+.about-photo-main {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.about-photo-accent {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 6px solid var(--cream);
+}
+
+@media (max-width: 768px) {
+  .about-photo-accent { display: none; }
+}
+
+.about-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.4;
+  font-style: italic;
+  margin-bottom: 24px;
+  padding-left: 20px;
+  border-left: 3px solid var(--teal);
+}
+
+.about-text {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.highlight-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+
+/* ── GALLERY ── */
+#gallery { background: var(--cream-dark); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 260px 260px;
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.gallery-item {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-item:first-child {
+  grid-column: 1 / 3;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.gallery-item:hover img { transform: scale(1.05); }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,31,30,0.6) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+.gallery-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .gallery-item:first-child { grid-column: 1 / 3; height: 220px; }
+  .gallery-item:not(:first-child) { height: 160px; }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-column: 1; }
+}
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--teal);
+  padding: 64px 0;
+}
+
+.cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .cta-inner { padding: 0 24px; flex-direction: column; text-align: center; }
+}
+
+.cta-band h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.cta-band p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+.btn-white {
+  background: var(--white);
+  color: var(--teal);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+
+/* ── CONTACT ── */
+#contact { background: var(--dark); }
+
+#contact .section-title { color: var(--white); }
+#contact .section-label { color: var(--teal-bright); }
+#contact .section-label::before { background: var(--teal-bright); }
+#contact .section-sub { color: rgba(255,255,255,0.45); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  margin-top: 56px;
+  align-items: start;
+}
+
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(58,191,179,0.1);
+  border: 1px solid rgba(58,191,179,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.contact-item-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal-bright);
+  margin-bottom: 4px;
+}
+
+.contact-item-value {
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.contact-item-value:hover { color: var(--teal-bright); }
+
+/* FORM */
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+
+.form-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--teal-bright);
+  background: rgba(58,191,179,0.06);
+}
+
+.form-field textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+
+.form-field select option { background: var(--dark); color: var(--white); }
+
+.form-submit {
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 15px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.form-submit:hover { background: var(--teal-light); }
+.form-submit:active { transform: scale(0.99); }
+
+/* Success message */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.form-success.show { display: block; }
+.form-success h3 { font-size: 20px; font-weight: 700; color: var(--teal-bright); margin-bottom: 8px; }
+.form-success p { color: rgba(255,255,255,0.5); font-size: 14px; }
+
+/* ── FOOTER ── */
+footer {
+  background: #060F0E;
+  padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .footer-inner { padding: 0 24px; flex-direction: column; text-align: center; }
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo img { height: 32px; }
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer-built {
+  font-size: 11px;
+  color: rgba(255,255,255,0.15);
+}
+
+.footer-built a {
+  color: rgba(58,191,179,0.4);
+  text-decoration: none;
+}
+
+.footer-built a:hover { color: var(--teal-bright); }
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://i.imgur.com/placeholder.png" alt="A.W Paint and Stain"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+    <span style="display:none; font-family:'Playfair Display',serif; font-weight:800; font-size:18px; color:white;">A.W <span style="color:#3ABFB3">Paint</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact" class="nav-cta">Free Estimate</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">Serving East Texas</div>
+      <h1>Making <em>plain</em><br>come to<br><em>life.</em></h1>
+      <p class="hero-sub">Painting, staining, and restoring homes, decks, boat docks, and structures across East Texas. Quality work, honest pricing, real results.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Get a Free Estimate
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#gallery" class="btn-secondary">See Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">East</div>
+          <div class="stat-label">Texas based</div>
+        </div>
+        <div>
+          <div class="stat-num">Free</div>
+          <div class="stat-label">Estimates</div>
+        </div>
+        <div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-photos">
+      <div class="hero-photo">
+        <img src="IMG_0423.png" alt="Stained dock">
+        <div class="hero-photo-overlay"></div>
+      </div>
+      <div class="hero-photo">
+        <img src="IMG_0422.png" alt="Dock restoration">
+        <div class="hero-photo-overlay"></div>
+      </div>
+      <div class="hero-photo">
+        <img src="IMG_0424.png" alt="Covered dock">
+        <div class="hero-photo-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Every surface,<br>done right.</h2>
+      <p class="section-sub">From a front porch to a full boat dock — if it needs paint or stain, we handle it.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <span class="service-icon">🏠</span>
+        <h3>Exterior Painting</h3>
+        <p>Full home exterior painting — clean lines, lasting finish, no shortcuts.</p>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🪵</span>
+        <h3>Wood Staining</h3>
+        <p>Decks, fences, siding — we bring out the natural beauty of the wood and protect it.</p>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">⚓</span>
+        <h3>Boat Dock Restoration</h3>
+        <p>Lake docks take a beating. We restore and stain them so they look brand new.</p>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🏚️</span>
+        <h3>Deck Restoration</h3>
+        <p>Faded, cracked, weathered decks brought back to life with the right prep and finish.</p>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🪟</span>
+        <h3>Fence Painting & Staining</h3>
+        <p>Privacy fences, split rails, cedar — painted or stained to match your property.</p>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🏗️</span>
+        <h3>Structures & More</h3>
+        <p>Barns, sheds, covered structures — if you can see it, we can paint or stain it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo-wrap fade-up">
+        <img src="IMG_0425.png" alt="A.W Paint and Stain work" class="about-photo-main">
+        <img src="IMG_0421.png" alt="Dock staining work" class="about-photo-accent">
+      </div>
+      <div class="fade-up">
+        <div class="section-label">About A.W</div>
+        <h2 class="section-title">A feller who loves his work.</h2>
+        <blockquote class="about-quote">"Just a feller who loves making people's plain homes, decks, boat docks and other structures come to life."</blockquote>
+        <p class="about-text">A.W Paint and Stain is a one-man operation built on doing the job right. Based in Grand Saline, TX, we serve homeowners and property owners all across East Texas who want quality work at a fair price.</p>
+        <p class="about-text">No crews cutting corners, no upsells you don't need. Just honest work from someone who takes pride in what they do.</p>
+        <div class="about-highlights">
+          <div class="highlight"><div class="highlight-dot"></div>Based in Grand Saline, TX — serving all of East Texas</div>
+          <div class="highlight"><div class="highlight-dot"></div>Free estimates — no pressure, no obligation</div>
+          <div class="highlight"><div class="highlight-dot"></div>Painting, staining, decks, docks, fences & more</div>
+          <div class="highlight"><div class="highlight-dot"></div>Owner on every single job</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Our Work</div>
+      <h2 class="section-title">The results speak<br>for themselves.</h2>
+      <p class="section-sub">Real jobs, real results. Every photo is work we've done right here in East Texas.</p>
+    </div>
+
+    <div class="gallery-grid fade-up">
+      <div class="gallery-item">
+        <img src="IMG_0423.png" alt="Covered dock interior staining">
+        <div class="gallery-overlay"><span class="gallery-label">Covered Dock — Lake Restoration</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0424.png" alt="Boat dock staining">
+        <div class="gallery-overlay"><span class="gallery-label">Boat Dock Stain</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0422.png" alt="Dock walkway staining">
+        <div class="gallery-overlay"><span class="gallery-label">Dock Walkway</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0421.png" alt="Full dock restoration">
+        <div class="gallery-overlay"><span class="gallery-label">Full Dock Restoration</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0425.png" alt="Covered dock staining">
+        <div class="gallery-overlay"><span class="gallery-label">Covered Dock Stain</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div>
+      <h2>Ready to transform your property?</h2>
+      <p>Call or text for a free estimate — no pressure, just an honest quote.</p>
+    </div>
+    <a href="tel:9033682546" class="btn-white">📞 (903) 368-2546</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Let's talk about<br>your project.</h2>
+      <p class="section-sub">Fill out the form or give us a call. We'll get back to you fast with a free estimate.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Phone / Text</div>
+            <a href="tel:9033682546" class="contact-item-value">(903) 368-2546</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <a href="mailto:awootang18@gmail.com" class="contact-item-value">awootang18@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Service Area</div>
+            <span class="contact-item-value">Grand Saline, TX & East Texas</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-item-label">Hours</div>
+            <span class="contact-item-value">Mon–Sat: 7am–6pm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvzlzlqg" method="POST">
+          <input type="hidden" name="client_site" value="A.W Paint and Stain">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Your Name</label>
+              <input type="text" name="name" placeholder="John Smith" required>
+            </div>
+            <div class="form-field">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="(903) 000-0000">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="you@email.com">
+          </div>
+          <div class="form-field">
+            <label>Service Needed</label>
+            <select name="service">
+              <option value="" disabled selected>Select a service</option>
+              <option>Exterior Painting</option>
+              <option>Wood Staining</option>
+              <option>Boat Dock Restoration</option>
+              <option>Deck Restoration</option>
+              <option>Fence Painting or Staining</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Tell Us About Your Project</label>
+            <textarea name="message" placeholder="Describe what you need — location, size, condition, any details that help..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <h3>Message sent!</h3>
+          <p>We'll be in touch soon with your free estimate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span style="font-family:'Playfair Display',serif; font-weight:800; font-size:16px; color:rgba(255,255,255,0.7);">A.W <span style="color:#3ABFB3">Paint & Stain</span></span>
+    </div>
+    <span class="footer-copy">© 2025 A.W Paint and Stain — Grand Saline, TX</span>
+    <span class="footer-built">Site by <a href="https://launchlocaltx.com" target="_blank">Launch Local TX</a></span>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        success.classList.add('show');
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Something went wrong — try again';
+      btn.disabled = false;
+    }
+  });
+
+  // Nav logo fallback already handled via onerror
+</script>
+
+</body>
+</html>
